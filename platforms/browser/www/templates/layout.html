@@ -1,0 +1,16 @@
+<ion-view view-title="{{layout_selected.title}}">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-android-add" ng-click="getImages()">
+    </button>
+  </ion-nav-buttons>
+  <ion-content>
+    <div class="row responsive-sm">
+      <div class="col" ng-repeat="image in pickedImages" style="border: 1px solid black;">
+        <img style="width:100%;" ng-src="{{image}}" on-hold="onHold($index)"/>
+      </div>
+    </div>
+    <!--<div style="width:100%;height:400px">-->
+    <!--<img ng-repeat="image in pickedImages" ng-src="{{image}}" on-hold="onHold($index)"/>-->
+    <!--</div>-->
+  </ion-content>
+</ion-view>
