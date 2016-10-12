@@ -4,19 +4,10 @@
         </button>
     </ion-nav-buttons>
     <ion-content has-header="true" padding="true" class="middle-v">
-        <!--<div class="row responsive-sm" style="margin-left:3%;border: 1px solid black;width:{{+dev_width-20}}px;height: {{+dev_width-20}}px;">-->
-            <!--<ion-scroll class="pic-layout" ng-repeat="image in pickedImages" zooming="true" direction="xy" min-zoom="-5"-->
-                        <!--overflow-scroll="false" scrollbar-x="false" scrollbar-y="false" style="width:{{(+dev_width-20)/2}}px;height: {{(+dev_width-20)/2}}px;">-->
-            <!--<img ng-src="{{image.url}}" on-hold="onHold($index)"  style="width:{{(+dev_width-30)/2}}px;height: {{(+dev_width-30)/2}}px;"/>-->
-            <!--</ion-scroll>-->
-        <!--</div>-->
-        <div class="row gallery row-center" style="border: 1px solid black;width:{{+dev_width-20}}px;height: {{+dev_width-20}}px;">
-            <div class="col col-50" ng-repeat="image in pickedImages">
-                <ion-scroll style="text-align: center;" zooming="true" direction="xy" min-zoom="-5" has-bouncing="true" locking="true"
-                            overflow-scroll="false" scrollbar-x="false" scrollbar-y="false">
-                    <img src="{{image.url}}" style="{{(+dev_width-50)/2}}px;height: {{(+dev_width-50)/2}}px;">
-                </ion-scroll>
-            </div>
+        <div class="row gallery row-center"
+             style="border: 1px solid black;width:{{+dev_width-20}}px;height: {{+dev_width-20}}px;overflow: auto;display: inline-block;">
+                <img ng-repeat="image in pickedImages" ng-src="{{image.url}}"
+                     on-double-tap="onDoubleTap($index)" style="height:{{(+dev_width-80)/2}}px;z-index: 9999;" transform>
         </div>
     </ion-content>
 </ion-view>

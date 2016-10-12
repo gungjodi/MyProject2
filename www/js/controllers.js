@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ['ngCordova','ngDraggable'])
+angular.module('starter.controllers', ['ngCordova'])
     .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
         // With the new view caching in Ionic, Controllers are only called
@@ -47,72 +47,41 @@ angular.module('starter.controllers', ['ngCordova','ngDraggable'])
         console.log(object_by_id);
         $scope.playlist=object_by_id;
     })
-    .controller('NewProjectCtrl',function ($scope,$window, $cordovaImagePicker,$ionicPlatform,$ionicActionSheet,$ionicGesture,LayoutService, $filter,$stateParams) {
+    .controller('NewProjectCtrl',function ($scope,$window,$ionicScrollDelegate, $cordovaImagePicker,$ionicPlatform,$ionicActionSheet,$ionicGesture,LayoutService, $filter,$stateParams) {
         $scope.layouts= LayoutService.grids;
-
         $scope.dev_width = $window.innerWidth;
         $scope.dev_height = $window.innerHeight;
+        $scope.pickedImages=[
 
-        var object_by_id = $filter('filter')(LayoutService.grids, {id: $stateParams.layoutId })[0];
-        console.log(object_by_id);
-        $scope.layout_selected=object_by_id;
+        ];
 
-        // $scope.pickedImages=[
-        //     {url:'img/1.jpg'},
-        //     {url:'img/2.jpg'},
-        //     {url:'img/3.jpg'},
-        //     {url:'img/4.jpg'},
-        // ];
-
-        if($stateParams.layoutId==1)
-        {
-            $scope.pickedImages=[
-                {url:'img/1.jpg'},
-            ];
-            $scope.imagecount=1;
-        }
-        else if($stateParams.layoutId==2||$stateParams.layoutId==3)
-        {
-            $scope.pickedImages=[
-                {url:'img/1.jpg'},
-                {url:'img/2.jpg'},
-            ];
-            $scope.imagecount=2;
-        }
-        else
-        {
-            $scope.pickedImages=[
-                {url:'img/1.jpg'},
-                {url:'img/2.jpg'},
-                {url:'img/3.jpg'},
-                {url:'img/4.jpg'},
-            ];
-            $scope.imagecount=4;
-        }
         var options = {
-            maximumImagesCount: $scope.imagecount,
+            maximumImagesCount: 10,
             quality: 100
         };
 
 
         $scope.getImages=function(){
             console.log('getImages');
-            var random = Math.floor((Math.random() * 4) + 1);
-            $scope.pickedImages.push({url:'img/'+random+'.jpg'});
+            // var random = Math.floor((Math.random() * 4) + 1);
+            // $scope.pickedImages.push({url:'img/'+random+'.jpg'});
             $cordovaImagePicker.getPictures(options).then(function (results) {
-                $scope.pickedImages=[];
+                // $scope.pickedImages=[];
                 for (var i = 0; i < results.length; i++) {
-                    console.log('Image URI: ' + results[i]);
                     $scope.pickedImages.push({url:results[i]});
+                    console.log($scope.pickedImages[i].url);
+                }
+                if(!$scope.$$phase) {
+                    $scope.$apply();
                 }
             }, function(error) {
                 console.log('Error getting images');
             });
         };
 
-        $scope.onHold=function(index)
+        $scope.onDoubleTap=function(index)
         {
-            console.log('HOLD');
+            console.log('Double tap');
             // Show the action sheet
             var hideSheet = $ionicActionSheet.show({
                 destructiveText: 'Delete',
@@ -127,13 +96,5 @@ angular.module('starter.controllers', ['ngCordova','ngDraggable'])
                     return true;
                 }
             });
-        }
-
-        $scope.onDropComplete = function (index, obj, evt) {
-            var otherObj = $scope.pickedImages[index];
-            var otherIndex = $scope.pickedImages.indexOf(obj);
-            $scope.pickedImages[index] = obj;
-            $scope.pickedImages[otherIndex] = otherObj;
-            console.log(index + ' | '+ obj + ' | '+ evt)
         }
     });

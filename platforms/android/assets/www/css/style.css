@@ -5,15 +5,3 @@
     flex-direction: column;
     justify-content: center;
 }
-
-.pic-layout{
-    display: block;
-    white-space: nowrap;
-    clear: both;
-}
-
-.gallery {
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-
