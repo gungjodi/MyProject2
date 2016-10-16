@@ -1,13 +1,20 @@
-<ion-view view-title="{{layout_selected.title}}">
+<ion-view view-title="New Project">
     <ion-nav-buttons side="right">
-        <button class="button button-icon ion-android-add" ng-click="getImages()">
-        </button>
+        <button class="button button-icon ion-android-add" ng-click="getImages()"></button>
+        <button class="button button-icon ion-android-load" ng-click="load()">load</button>
+        <button class="button button-icon ion-android-load" ng-click="save()">save</button>
+        <button class="button button-icon ion-android-load" ng-click="newpage()">newpage</button>
     </ion-nav-buttons>
-    <ion-content has-header="true" padding="true" class="middle-v">
-        <div class="row gallery row-center"
-             style="border: 1px solid black;width:{{+dev_width-20}}px;height: {{+dev_width-20}}px;overflow: auto;display: inline-block;">
-                <img ng-repeat="image in pickedImages" ng-src="{{image.url}}"
-                     on-double-tap="onDoubleTap($index)" style="height:{{(+dev_width-80)/2}}px;z-index: 9999;" transform>
-        </div>
+    <ion-content scroll="false" has-header="true" padding="true" class="middle-v">
+        <ion-slides options="options" slider="data.slider" >
+            <ion-slide-page class="middle-v" ng-repeat="(key, value) in pickedImages | groupBy: 'page'">
+                <div class="row gallery row-center middle-v"
+                     style="border: 1px solid black;width:{{+dev_width-20}}px;height: {{+dev_width-20}}px;overflow: auto;display: inline-block;">
+                    <img id="image{{$index}}" ng-repeat="image in value" ng-src="{{image.url}}"
+                         on-double-tap="onDoubleTap($index)" style="height:{{(+dev_width-80)/2}}px;z-index: 9999;" transform>
+                </div>
+            </ion-slide-page>
+        </ion-slides>
+
     </ion-content>
 </ion-view>

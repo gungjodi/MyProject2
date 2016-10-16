@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers','ngCordova','starter.services','starter.directives'])
+angular.module('starter', ['ionic','ngCordova','angular.filter','starter.controllers','starter.services','starter.directives'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -35,7 +35,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova','starter.s
     url: '/new_project',
     views: {
       'menuContent': {
-        templateUrl: 'templates/new_project.html',
+        templateUrl: 'templates/layout.html',
         controller:'NewProjectCtrl'
       }
     }

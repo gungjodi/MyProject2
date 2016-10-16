@@ -6,7 +6,7 @@ angular.module('starter.directives', ['ngCordova'])
     return {
         restrict: 'A',
         link: function($scope, $element) {
-            $timeout(function() {
+          $timeout(function() {
                 console.log($element);
                 var square = $element[0],
                     posX = 0,
@@ -19,12 +19,12 @@ angular.module('starter.directives', ['ngCordova'])
                     lastScale=$element[0].width,
                     rotation = 0,
                     last_rotation, dragReady = 0;
-                ionic.onGesture('touch drag transform dragend transformend', function(e) {
+              ionic.onGesture('touch drag transform dragend transformend', function(e) {
                     e.gesture.srcEvent.preventDefault();
                     e.gesture.preventDefault();
+                    console.log(e.type);
                     switch (e.type) {
                         case 'touch':
-                            console.log('touch');
                             lastScale = scale;
                             last_rotation = rotation;
                             posX = lastPosX;
@@ -35,21 +35,20 @@ angular.module('starter.directives', ['ngCordova'])
                             posY = e.gesture.deltaY + lastPosY;
                             break;
                         case 'transform':
-                            console.log('transform');
                             rotation = e.gesture.rotation + last_rotation;
                             scale = e.gesture.scale * lastScale;
                             posX = lastPosX;
                             posY = lastPosY;
-                            console.log("X: ",lastPosX);
-                            console.log("Y: ",lastPosY);
+                            //last_rotation = rotation;
+                            //lastScale = scale;
                             break;
                         case 'dragend':
                             lastPosX = posX;
                             lastPosY = posY;
                             lastScale = scale;
+                            last_rotation = rotation;
                             break;
                         case 'transformend':
-                            console.log('transformend');
                             posX = lastPosX;
                             posY = lastPosY;
                             lastScale = scale;
@@ -62,6 +61,7 @@ angular.module('starter.directives', ['ngCordova'])
                         "rotate(" + rotation + "deg) ";
                     e.target.style.transform = transform;
                     e.target.style.webkitTransform = transform;
+                    console.log(transform);
                 }, $element[0]);
             });
         }

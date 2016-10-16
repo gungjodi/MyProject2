@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content drag-content="false">
-    <ion-nav-bar class="bar-stable">
+    <ion-nav-bar class="bar-calm">
       <ion-nav-back-button>
       </ion-nav-back-button>
 
@@ -16,22 +16,22 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-header-bar class="bar-stable">
+    <ion-header-bar class="bar-calm">
       <h1 class="title">Menu</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close ng-click="login()">
-          Login
-        </ion-item>
         <ion-item menu-close href="#/app/new_project">
-          New Project
+          My Project
+        </ion-item>
+        <ion-item menu-close ng-click="login()">
+          Checkout
         </ion-item>
         <!--<ion-item menu-close href="#/app/browse">-->
           <!--Browse-->
         <!--</ion-item>-->
         <ion-item menu-close href="#/app/playlists">
-          Playlists
+          Accounts
         </ion-item>
       </ion-list>
     </ion-content>
